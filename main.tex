@@ -10,7 +10,18 @@
 \usepackage{booktabs}
 \usepackage[labelfont=it]{caption}  % italicize caption label
 \usepackage{subcaption}  % subfigure
-% \usepackage{amsmath}
+
+% --- Other useful packages ---
+% \usepackage{amsmath}  % NOTE: amssymb conflicts with newtxmath
+
+% \usepackage[acronym]{glossaries-extra}
+% \setabbreviationstyle[acronym]{long-short}
+
+% \usepackage{pgfplots}
+% \pgfplotsset{compat=1.18}
+
+% \usepackage{siunitx}               % A better way of writing things with units
+% \sisetup{load-configurations=abbreviations,binary-units=true}
 
 % Bibliography using biblatex (sorted IEEE style by default). Change the style accordingly.
 \usepackage[backref=true,sorting=nty,style=ieee]{biblatex}
@@ -32,7 +43,7 @@
 \makeprelimpages
 
 \mainmatter
-% The guide outlined in these chapters were created by Dr. Rowel Atienza.
+% The guide outlined in these chapters was created by Dr. Rowel Atienza.
 \input{chapters/1-introduction}
 \input{chapters/2-related_work}
 \input{chapters/3-problem_statement}
