@@ -44,12 +44,12 @@
 \title{\thesistitle}
 \author{\student}
 \date{\submissiondate}
-\AtBeginDocument{
-\hypersetup{pdftitle=\thesistitle}
-\hypersetup{pdfauthor=\student}
-\hypersetup{pdfkeywords=\keywords}
-\hypersetup{pdfsubject=\degree}
-}
+\AtBeginDocument{\hypersetup{
+    pdftitle=\thesistitle,
+    pdfauthor=\student,
+    pdfkeywords=\keywords,
+    pdfsubject=\degree
+}}
 
 % --- Prelim pages command ---
 \newcommand{\makeprelimpages}{%

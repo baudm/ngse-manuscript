@@ -20,15 +20,16 @@
 % \usepackage{pgfplots}
 % \pgfplotsset{compat=1.18}
 
-% \usepackage{siunitx}               % A better way of writing things with units
+% \usepackage{siunitx}  % A better way of writing things with units
 % \sisetup{load-configurations=abbreviations,binary-units=true}
 
-% Bibliography using biblatex (sorted IEEE style by default). Change the style accordingly.
-\usepackage[backref=true,sorting=nty,bibstyle=ieee,citestyle=numeric-comp]{biblatex}
+% Bibliography using biblatex
+\usepackage[backref,sorting=nty,bibstyle=ieee,citestyle=numeric-comp]{biblatex}  % IEEE style (sorted)
+% \usepackage[backref,style=apa]{biblatex}  % APA style (7th edition)
 \setcounter{biburlnumpenalty}{9000}  % Make sure long URLs have line breaks
 \addbibresource{references.bib}
 
-\usepackage[breaklinks,\iftoggle{review}{colorlinks}{hidelinks}]{hyperref}
+\usepackage[pdflang=en-US,breaklinks,\iftoggle{review}{colorlinks}{hidelinks}]{hyperref}
 
 % Support for easy cross-referencing. cleveref must always be loaded last.
 \usepackage[capitalize]{cleveref}
