@@ -10,32 +10,34 @@
 \DeclareOption*{\PackageWarning{ngse}{Unknown ‘\CurrentOption’}}
 \ProcessOptions\relax
 
-% Page size and margins
-\iftoggle{proposal}{
-\RequirePackage[a4paper,margin=1in]{geometry}
-}{
-\RequirePackage[letterpaper,margin=1in,left=1.5in]{geometry}
-}
-
-% Language and font encodings
+% --- Language and encodings ---
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english]{babel}
 
-% --- Styles ---
-\RequirePackage{newtxtext,newtxmath}  % Use Times Roman font
-\RequirePackage{setspace}  % Line spacing commands
+% --- Page size and margins ---
+\RequirePackage[margin=1in,\iftoggle{proposal}{a4}{left=1.5in,letter}paper]{geometry}
+
+% --- Indents and spacing ---
+\setlength{\parindent}{0.5in}  % Half-inch indents
 \RequirePackage{indentfirst}  % Indent the first paragraph of a section
-\RequirePackage[titletoc]{appendix}  % Provides `appendices` environment; `titletoc` adds appendices to ToC.
-\RequirePackage{tocbibind}  % Add the ToC and bibliography (BibTeX only) to the ToC
+\RequirePackage{setspace}  % Line spacing commands
+\onehalfspacing  % 1.5 line spacing globally
+
+% --- General style tweaks ---
+\RequirePackage{newtxtext,newtxmath}  % Use Times Roman font
+% Better typesetting with microtype
+\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 
 % Combine chapter number and title in a single line
 \RequirePackage{titlesec}
 \titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter.}{1em}{}
-
-\addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}  % Rename ToC
-\setlength{\parindent}{0.5in}
 \pagestyle{plain}  % No headers; page numbers at bottom-center of page
+
+% --- ToC tweaks ---
+\addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}  % Rename ToC
+\RequirePackage{tocbibind}  % Add the ToC and bibliography (BibTeX only) to the ToC
+\RequirePackage[titletoc]{appendix}  % Provides `appendices` environment; `titletoc` adds appendices to ToC.
 
 % --- Metadata ---
 \input{metadata}
@@ -50,20 +52,20 @@
 }
 
 % --- Prelim pages command ---
-\newcommand{\makeprelimpages}{
-\iftoggle{proposal}{
-    \input{prelim_pages/title_page_proposal}
-    \onehalfspacing  % 1.5 space in paragraph
-}{
+\newcommand{\makeprelimpages}{%
+\iftoggle{proposal}{%
+    {\singlespacing\input{prelim_pages/title_page_proposal}}
+}{%
+    {\singlespacing
     \input{prelim_pages/title_page}
     \input{prelim_pages/univ_permission_page}
     \input{prelim_pages/approval_page}
-    \onehalfspacing  % 1.5 space in paragraph
+    }
     \input{prelim_pages/acknowledgment}
 }
 \input{prelim_pages/abstract}
-{
-    \hypersetup{hidelinks}
+{%
+    \hypersetup{hidelinks}  % Hide links for these pages even for the review version
     \tableofcontents
     \listoftables
     \listoffigures
@@ -73,21 +75,23 @@
 % --- Line numbers for review ---
 \iftoggle{review}{
 \RequirePackage{lineno}
-\RequirePackage{xcolor}
+\RequirePackage{color}
 \renewcommand{\linenumberfont}{\normalfont\footnotesize\sffamily\color[rgb]{.5,.5,1}}  % blue font color, larger font
 \setlength\linenumbersep{1cm}  % wider separation
 % Line numbers in both margins (adapted from: https://tex.stackexchange.com/a/199593)
 \makeatletter
-\def\makeLineNumberLeft{
-  \linenumberfont\llap{\hss\LineNumber\hskip\linenumbersep}  % left line number
-  \hskip\columnwidth  % skip over column of text
-  \rlap{\hskip\linenumbersep\hb@xt@\linenumberwidth{\hss\LineNumber}}\hss}  % right line number
-\leftlinenumbers  % Re-issue [left] option
+\renewcommand\makeLineNumberLeft{%
+    \linenumberfont
+    \llap{\hss\LineNumber\hskip\linenumbersep}  % left margin
+    \hskip\columnwidth\hskip\linenumbersep
+    \rlap{\hb@xt@\linenumberwidth{\hss\LineNumber}\hss}  % right margin
+}
 \makeatother
+\leftlinenumbers  % Re-issue [left] option
 \linenumbers
 }{}
 
-% --- Abbreviations (from CVPR template) ---
+% --- Abbreviations (extracted from CVPR template) ---
 % Add a period to the end of an abbreviation unless there's one already, then \xspace.
 \RequirePackage{xspace}
 \makeatletter
