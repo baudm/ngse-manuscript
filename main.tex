@@ -1,0 +1,54 @@
+\documentclass[oneside,12pt]{book}
+
+% \usepackage{ngse}  % To produce the CAMERA-READY version
+\usepackage[review]{ngse}  % To produce the REVIEW version
+% \usepackage[review,proposal]{ngse}  % To produce the REVIEW version of the proposal
+
+% Include other packages here, before hyperref.
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[labelfont=it]{caption}  % italicize caption label
+\usepackage{subcaption}  % subfigure
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+
+% Bibliography using biblatex (sorted IEEE style by default). Change the style accordingly.
+\usepackage[backref=true,sorting=nty,style=ieee]{biblatex}
+\setcounter{biburlnumpenalty}{9000}  % Make sure long URLs have line breaks
+\addbibresource{references.bib}
+
+\usepackage[breaklinks,\iftoggle{review}{colorlinks}{hidelinks}]{hyperref}
+
+% Support for easy cross-referencing
+\usepackage[capitalize]{cleveref}
+\crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+\Crefname{table}{Table}{Tables}
+\crefname{table}{Tab.}{Tabs.}
+
+\begin{document}
+
+\frontmatter
+\makeprelimpages
+
+\mainmatter
+% The guide outlined in these chapters were created by Dr. Rowel Atienza.
+\input{chapters/1-introduction}
+\input{chapters/2-related_work}
+\input{chapters/3-problem_statement}
+\input{chapters/4-methodology}
+\input{chapters/5-results}
+\input{chapters/6-analysis}
+\input{chapters/7-conclusion}
+
+\printbibliography[heading=bibintoc]
+
+% Seems redundant, but we need \appendix so that cross-references will be shown as "Appendix..." and not as "Chapter..." or Section.
+% Usage of the appendices environment is required to change the ToC entries to "Appendix A" instead of just "A".
+\appendix
+\begin{appendices}
+\input{chapters/appendices}
+\end{appendices}
+
+\end{document}

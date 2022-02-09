@@ -1,0 +1,105 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ngse}[2022/02/08 NGSE Manuscript Style]
+
+% --- Package Options: proposal and review ---
+\RequirePackage{etoolbox}
+\newtoggle{proposal}  % Proposal version
+\newtoggle{review}  % Review version
+\DeclareOption{proposal}{\toggletrue{proposal}}
+\DeclareOption{review}{\toggletrue{review}}
+\DeclareOption*{\PackageWarning{ngse}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+% Page size and margins
+\iftoggle{proposal}{
+\RequirePackage[a4paper,top=1in,bottom=1in,left=1in,right=1in]{geometry}
+}{
+\RequirePackage[letterpaper,top=1in,bottom=1in,left=1.5in,right=1in]{geometry}
+}
+
+% Language and font encodings
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[english]{babel}
+
+% --- Styles ---
+\RequirePackage{setspace}  % Provides: \onehalfspacing
+\RequirePackage{indentfirst}  % Indent the first paragraph of a section
+\RequirePackage[titletoc]{appendix}  % Provides `appendices` environment; `titletoc` adds appendices to ToC.
+% \RequirePackage{tocbibind}  % Add bibliography to ToC (for bibtex only)
+
+% Combine chapter number and title in a single line
+\RequirePackage{titlesec}
+\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter.}{1em}{}
+
+\addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}  % Rename ToC
+\setlength{\parindent}{0.5in}
+\pagestyle{plain}  % For consistent placement of page numbers (bottom-center of page)
+
+% --- Metadata ---
+\input{metadata}
+\title{\thesistitle}
+\author{\student}
+\date{\submissiondate}
+\AtBeginDocument{
+\hypersetup{pdftitle=\thesistitle}
+\hypersetup{pdfauthor=\student}
+\hypersetup{pdfkeywords=\keywords}
+\hypersetup{pdfsubject=\degree}
+}
+
+% --- Prelim pages command ---
+\newcommand{\makeprelimpages}{
+\iftoggle{proposal}{
+    \input{prelim_pages/title_page_proposal}
+    \onehalfspacing  % 1.5 space in paragraph
+}{
+    \input{prelim_pages/title_page}
+    \input{prelim_pages/univ_permission_page}
+    \input{prelim_pages/approval_page}
+    \onehalfspacing  % 1.5 space in paragraph
+    \input{prelim_pages/acknowledgment}
+}
+\input{prelim_pages/abstract}
+{
+    \hypersetup{hidelinks}
+    \tableofcontents
+    \listoftables
+    \listoffigures
+}
+}
+
+% --- Line numbers for review ---
+\iftoggle{review}{
+\RequirePackage{lineno}
+\RequirePackage{xcolor}
+\renewcommand{\linenumberfont}{\normalfont\footnotesize\sffamily\color[rgb]{.5,.5,1}}  % blue font color, larger font
+\setlength\linenumbersep{1cm}  % wider separation
+% Line numbers in both margins (adapted from: https://tex.stackexchange.com/a/199593)
+\makeatletter
+\def\makeLineNumberLeft{%
+  \linenumberfont\llap{\hss\LineNumber\hskip\linenumbersep}% left line number
+  \hskip\columnwidth% skip over column of text
+  \rlap{\hskip\linenumbersep\hb@xt@\linenumberwidth{\hss\LineNumber}}\hss}% right line number
+\leftlinenumbers% Re-issue [left] option
+\makeatother
+\linenumbers
+}{}
+
+% --- Abbreviations (from CVPR template) ---
+% Add a period to the end of an abbreviation unless there's one already, then \xspace.
+\RequirePackage{xspace}
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+
+\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{cf}\onedot} \def\Cf{\emph{Cf}\onedot}
+\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\iid{i.i.d\onedot} \def\wolog{w.l.o.g\onedot}
+\def\etal{\emph{et al}\onedot}
+\makeatother
+
+\endinput
