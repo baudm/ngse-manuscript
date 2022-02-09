@@ -1,4 +1,4 @@
-\documentclass[oneside,12pt]{book}
+\documentclass[12pt,oneside]{book}
 
 % \usepackage{ngse}  % To produce the CAMERA-READY version
 \usepackage[review]{ngse}  % To produce the REVIEW version
@@ -11,7 +11,6 @@
 \usepackage[labelfont=it]{caption}  % italicize caption label
 \usepackage{subcaption}  % subfigure
 % \usepackage{amsmath}
-% \usepackage{amssymb}
 
 % Bibliography using biblatex (sorted IEEE style by default). Change the style accordingly.
 \usepackage[backref=true,sorting=nty,style=ieee]{biblatex}
@@ -20,7 +19,7 @@
 
 \usepackage[breaklinks,\iftoggle{review}{colorlinks}{hidelinks}]{hyperref}
 
-% Support for easy cross-referencing
+% Support for easy cross-referencing. cleveref must always be loaded last.
 \usepackage[capitalize]{cleveref}
 \crefname{section}{Sec.}{Secs.}
 \Crefname{section}{Section}{Sections}
@@ -42,7 +41,7 @@
 \input{chapters/6-analysis}
 \input{chapters/7-conclusion}
 
-\printbibliography[heading=bibintoc]
+{\singlespacing\printbibliography[heading=bibintoc]}
 
 % Seems redundant, but we need \appendix so that cross-references will be shown as "Appendix..." and not as "Chapter..." or Section.
 % Usage of the appendices environment is required to change the ToC entries to "Appendix A" instead of just "A".

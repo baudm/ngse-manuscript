@@ -12,9 +12,9 @@
 
 % Page size and margins
 \iftoggle{proposal}{
-\RequirePackage[a4paper,top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\RequirePackage[a4paper,margin=1in]{geometry}
 }{
-\RequirePackage[letterpaper,top=1in,bottom=1in,left=1.5in,right=1in]{geometry}
+\RequirePackage[letterpaper,margin=1in,left=1.5in]{geometry}
 }
 
 % Language and font encodings
@@ -23,10 +23,11 @@
 \RequirePackage[english]{babel}
 
 % --- Styles ---
-\RequirePackage{setspace}  % Provides: \onehalfspacing
+\RequirePackage{newtxtext,newtxmath}  % Use Times Roman font
+\RequirePackage{setspace}  % Line spacing commands
 \RequirePackage{indentfirst}  % Indent the first paragraph of a section
 \RequirePackage[titletoc]{appendix}  % Provides `appendices` environment; `titletoc` adds appendices to ToC.
-% \RequirePackage{tocbibind}  % Add bibliography to ToC (for bibtex only)
+\RequirePackage{tocbibind}  % Add the ToC and bibliography (BibTeX only) to the ToC
 
 % Combine chapter number and title in a single line
 \RequirePackage{titlesec}
@@ -34,7 +35,7 @@
 
 \addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}  % Rename ToC
 \setlength{\parindent}{0.5in}
-\pagestyle{plain}  % For consistent placement of page numbers (bottom-center of page)
+\pagestyle{plain}  % No headers; page numbers at bottom-center of page
 
 % --- Metadata ---
 \input{metadata}
@@ -77,11 +78,11 @@
 \setlength\linenumbersep{1cm}  % wider separation
 % Line numbers in both margins (adapted from: https://tex.stackexchange.com/a/199593)
 \makeatletter
-\def\makeLineNumberLeft{%
-  \linenumberfont\llap{\hss\LineNumber\hskip\linenumbersep}% left line number
-  \hskip\columnwidth% skip over column of text
-  \rlap{\hskip\linenumbersep\hb@xt@\linenumberwidth{\hss\LineNumber}}\hss}% right line number
-\leftlinenumbers% Re-issue [left] option
+\def\makeLineNumberLeft{
+  \linenumberfont\llap{\hss\LineNumber\hskip\linenumbersep}  % left line number
+  \hskip\columnwidth  % skip over column of text
+  \rlap{\hskip\linenumbersep\hb@xt@\linenumberwidth{\hss\LineNumber}}\hss}  % right line number
+\leftlinenumbers  % Re-issue [left] option
 \makeatother
 \linenumbers
 }{}
