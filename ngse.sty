@@ -21,14 +21,12 @@
 % --- Indents and spacing ---
 \setlength{\parindent}{0.5in}  % Half-inch indents
 \RequirePackage{indentfirst}  % Indent the first paragraph of a section
-\RequirePackage{setspace}  % Line spacing commands
-\onehalfspacing  % 1.5 line spacing globally
+\RequirePackage[onehalfspacing]{setspace}  % 1.5 line spacing globally
 
 % --- General style tweaks ---
 \RequirePackage{newtxtext,newtxmath}  % Use Times Roman font
 % Better typesetting with microtype
 \RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
-
 % Combine chapter number and title in a single line
 \RequirePackage{titlesec}
 \titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter.}{1em}{}
@@ -66,9 +64,11 @@
 \input{prelim_pages/abstract}
 {%
     \hypersetup{hidelinks}  % Hide links for these pages even for the review version
+    \microtypesetup{protrusion=false} % disables protrusion locally in the document
     \tableofcontents
     \listoftables
     \listoffigures
+    \microtypesetup{protrusion=true} % enables protrusion
 }
 }
 
