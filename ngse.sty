@@ -11,8 +11,8 @@
 \ProcessOptions\relax
 
 % --- Language and encodings ---
-\RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
 \RequirePackage[english]{babel}
 
 % --- Page size and margins ---
@@ -24,12 +24,12 @@
 \RequirePackage[onehalfspacing]{setspace}  % 1.5 line spacing globally
 
 % --- General style tweaks ---
-\RequirePackage{newtxtext,newtxmath}  % Use Times Roman font
+\RequirePackage{newtxtext,newtxmath,newtxtt}  % Use Times Roman font
 % Better typesetting with microtype
-\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100]{microtype}
 % Combine chapter number and title in a single line
 \RequirePackage{titlesec}
-\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter.}{1em}{}
+\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter.}{20pt}{}
 \pagestyle{plain}  % No headers; page numbers at bottom-center of page
 
 % --- ToC tweaks ---
