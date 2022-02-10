@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{ngse}[2022/02/08 NGSE Manuscript Style]
 
+\RequirePackage[T1]{fontenc}
+
 % --- Package Options: proposal and review ---
 \RequirePackage{etoolbox}
 \newtoggle{proposal}  % Proposal version
@@ -10,11 +12,6 @@
 \DeclareOption*{\PackageWarning{ngse}{Unknown ‘\CurrentOption’}}
 \ProcessOptions\relax
 
-% --- Language and encodings ---
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[english]{babel}
-
 % --- Page size and margins ---
 \RequirePackage[margin=1in,\iftoggle{proposal}{a4}{left=1.5in,letter}paper]{geometry}
 
@@ -23,10 +20,21 @@
 \RequirePackage{indentfirst}  % Indent the first paragraph of a section
 \RequirePackage[onehalfspacing]{setspace}  % 1.5 line spacing globally
 
-% --- General style tweaks ---
-\RequirePackage{newtxtext,newtxmath,newtxtt}  % Use Times Roman font
-% Better typesetting with microtype
+% --- Hyphenation, quotation, and typesetting ---
+\RequirePackage[english]{babel}
+\RequirePackage{csquotes}
 \RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath}  % disable protrusion for tt fonts
+
+% --- Fonts (load after babel) ---
+\RequirePackage{newtxtext}  % Use Times Roman fonts
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}  % FIXME: newtx 1.7 onwards has `amsthm` option
+\RequirePackage{newtxmath}  % Use Times Roman compatible math fonts
+\RequirePackage[zerostyle=d,straightquotes]{newtxtt}  % Enhancement of typewriter fonts
+
+% --- General style tweaks ---
+\RequirePackage[font=small,labelfont=it]{caption}  % Use small font, italicize caption label
 % Combine chapter number and title in a single line
 \RequirePackage{titlesec}
 \titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter.}{20pt}{}
@@ -64,11 +72,11 @@
 \input{prelim_pages/abstract}
 {%
     \hypersetup{hidelinks}  % Hide links for these pages even for the review version
-    \microtypesetup{protrusion=false} % disables protrusion locally in the document
+    \microtypesetup{protrusion=false}  % disables protrusion locally in the document
     \tableofcontents
     \listoftables
     \listoffigures
-    \microtypesetup{protrusion=true} % enables protrusion
+    \microtypesetup{protrusion=true}  % enables protrusion
 }
 }
 
