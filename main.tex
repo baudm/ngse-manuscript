@@ -14,8 +14,7 @@
 % --- Other useful packages ---
 % \usepackage{amsmath}  % NOTE: amssymb conflicts with newtxmath
 
-% \usepackage[acronym]{glossaries-extra}
-% \setabbreviationstyle[acronym]{long-short}
+% \usepackage{glossaries-extra}
 
 % \usepackage{pgfplots}
 % \pgfplotsset{compat=1.18}
@@ -26,6 +25,7 @@
 % Bibliography using biblatex
 \usepackage[backref,sorting=nty,bibstyle=ieee,citestyle=numeric-comp,dashed=false]{biblatex}  % IEEE style (sorted)
 % \usepackage[backref,style=apa]{biblatex}  % APA style (7th edition)
+% \setlength\bibitemsep{0.3\baselineskip}  % For APA style: add a bit of separation between bib items
 \setcounter{biburlnumpenalty}{9000}  % Make sure long URLs have line breaks
 \addbibresource{references.bib}
 
@@ -35,8 +35,8 @@
 \usepackage[capitalize]{cleveref}
 \crefname{section}{Sec.}{Secs.}
 \Crefname{section}{Section}{Sections}
-\Crefname{table}{Table}{Tables}
 \crefname{table}{Tab.}{Tabs.}
+\Crefname{table}{Table}{Tables}
 
 \begin{document}
 
