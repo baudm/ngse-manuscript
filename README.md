@@ -2,7 +2,7 @@
 - Thesis manuscript template for the National Graduate School of Engineering (NGSE), UP Diliman.
 - Based on the `book` document class. Follows the general styling of the [NGSE manuscript template](https://coe.upd.edu.ph/forms/).
 - Form and structure follows the guide created by [Dr. Rowel Atienza](https://github.com/roatienza). The outlines for each chapter were directly lifted from his guide.
-- See precompiled samples for the [proposal](https://github.com/baudm/ngse-manuscript/blob/main/samples/proposal.pdf) and [review version](https://github.com/baudm/ngse-manuscript/blob/main/samples/final_review.pdf) of the manuscript.
+- See precompiled samples for the [proposal](https://github.com/baudm/ngse-manuscript/blob/main/samples/proposal.pdf) (APA-style bib) and [review version](https://github.com/baudm/ngse-manuscript/blob/main/samples/final_review.pdf) (IEEE-style bib) of the manuscript.
 
 ## Features
 - Clean and minimal template with sane defaults. Styling tweaks and enhancements are self-contained in the `manuscript` document class.
