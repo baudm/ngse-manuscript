@@ -22,19 +22,21 @@
 **NOTE:** `chapters/4-methodology.tex` contains important information regarding style and formatting (`\autocite{...}`, cross-references, abbreviations, etc.) that were adapted from the CVPR 2022 template.
 
 ## Comparison with the NGSE template
-| &nbsp;           | NGSE template         | This template                       | Remarks                              |
-|:----------------:|:---------------------:|:-----------------------------------:|--------------------------------------|
-| **Page size**    | letter                | letter (final), A4 (proposal)       | Toggled by `proposal` option         |
-| **Margins**      | 1",left=1.5"          | 1",left=1.5" (final); 1" (proposal) | Toggled by `proposal` option         |
-| **Indents**      | 0.5"                  | 0.5"                                |                                      |
-| **Line spacing** | double                | 1.5 (default), double               | Toggled by `double` option           |
-| **Page numbers** | upper-right           | bottom-center                       |                                      |
-| **Typeface**     | Times New Roman, etc. | Times Roman                         |                                      |
-| **Point size**   | 12pt                  | 12pt                                |                                      |
-| **Captions**     | 12pt, *italic* label  | 11pt, *italic* label                |                                      |
-| **Bib style**    | APA-like              | IEEE (sorted)                       | Set via `biblatex`, e.g. `style=apa` |
+| &nbsp;           | NGSE template<sup>1</sup> | This template<sup>2</sup>           | Remarks                              |
+|:----------------:|:-------------------------:|:-----------------------------------:|--------------------------------------|
+| **Page size**    | letter                    | letter (final), A4 (proposal)       | Toggled by `proposal` option         |
+| **Margins**      | 1",left=1.5"              | 1",left=1.5" (final); 1" (proposal) | Toggled by `proposal` option         |
+| **Indents**      | 0.5"                      | 0.5"                                |                                      |
+| **Line spacing** | double                    | 1.5 (default), double               | Toggled by `double` option           |
+| **Page numbers** | upper-right               | bottom-center                       |                                      |
+| **Typeface**     | Times New Roman           | Times Roman                         |                                      |
+| **Point size**   | 12pt                      | 12pt                                |                                      |
+| **Captions**     | 12pt, *italic* label      | 11pt, *italic* label                |                                      |
+| **Bib style**    | APA-like                  | IEEE (default)                      | Configurable, e.g. `style=apa`       |
 
-**NOTE:** In the `proposal` version, a simpler title page is used (`title_proposal`) and the following preliminary pages are excluded: `univ_permission`, `approval`, and `acknowledgment`.
+**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, the sizes used for chapter and section titles are inconsistent.
+
+**<sup>2</sup>** In the `proposal` version, a simpler title page is used (`title_proposal`) and the following preliminary pages are excluded: `univ_permission`, `approval`, and `acknowledgment`.
 
 ## License
 This project is licensed under the Apache License 2.0. See `LICENSE` for details.
