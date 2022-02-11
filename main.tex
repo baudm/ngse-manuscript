@@ -1,16 +1,19 @@
-\documentclass[12pt,oneside]{book}
+\documentclass{manuscript}  % To produce the CAMERA-READY version
+% \documentclass[double]{manuscript}  % Use double spacing
+% \documentclass[review]{manuscript}  % To produce the REVIEW version
+% \documentclass[review,proposal]{manuscript}  % To produce the REVIEW version of the proposal
 
 \usepackage[utf8]{inputenc}
 
-% \usepackage{ngse}  % To produce the CAMERA-READY version
-\usepackage[review]{ngse}  % To produce the REVIEW version
-% \usepackage[review,proposal]{ngse}  % To produce the REVIEW version of the proposal
-
 % Include other packages here, before hyperref.
+\usepackage{appendix}  % Provides the appendices environment
+\usepackage{csquotes}
 \usepackage{enumerate}
-\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{subcaption}
+
+\usepackage{graphicx}
+\graphicspath{{images/}}  % No need to prepend images/ to the path.
 
 % Other useful packages
 % \usepackage{pgfplots}
@@ -18,25 +21,20 @@
 % \usepackage{glossaries-extra}
 
 % Bibliography using biblatex
-\usepackage[backref,sorting=nty,bibstyle=ieee,citestyle=numeric-comp,dashed=false]{biblatex}  % IEEE style (sorted)
+\usepackage[backref,bibstyle=ieee,citestyle=numeric-comp,dashed=false,sorting=nty]{biblatex}  % IEEE style (sorted)
 % \usepackage[backref,style=apa]{biblatex}  % APA style (7th edition)
 % \setlength\bibitemsep{0.3\baselineskip}  % For APA style: add a bit of separation between bib items
-\setcounter{biburlnumpenalty}{9000}  % Make sure long URLs have line breaks
 \addbibresource{references.bib}
 
-\usepackage[pdflang=en-US,breaklinks,\iftoggle{review}{colorlinks}{hidelinks}]{hyperref}
-
-% Support for easy cross-referencing. cleveref must always be loaded last.
+% These two must be loaded last:
+\usepackage[breaklinks]{hyperref}
+% Support for easy cross-referencing. Should be loaded after hyperref.
 \usepackage[capitalize]{cleveref}
-\crefname{section}{Sec.}{Secs.}
-\Crefname{section}{Section}{Sections}
-\crefname{table}{Tab.}{Tabs.}
-\Crefname{table}{Table}{Tables}
 
 \begin{document}
 
 \frontmatter
-\makeprelimpages
+\makeprelims
 
 \mainmatter
 % The guide outlined in these chapters was created by Dr. Rowel Atienza.
@@ -56,5 +54,7 @@
 \begin{appendices}
 \input{chapters/appendices}
 \end{appendices}
+
+% \printunsrtglossary  % if using glossaries-extra
 
 \end{document}
