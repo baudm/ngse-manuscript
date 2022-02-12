@@ -1,7 +1,13 @@
-\documentclass{manuscript}  % To produce the CAMERA-READY version
-% \documentclass[double]{manuscript}  % Use double spacing
-% \documentclass[review]{manuscript}  % To produce the REVIEW version
-% \documentclass[review,proposal]{manuscript}  % To produce the REVIEW version of the proposal
+% manuscript class options:
+%   onehalfspacing  - Use 1.5 line spacing instead of double.
+%   lineno          - Show line numbers. Useful for the review process.
+%   proposal        - Use the proposal title page and exclude several preliminary pages.
+%   ieee            - Use customized IEEE biblatex style
+%   apa             - Use customized APA biblatex style
+%   draft           - book class option. Faster typesetting. Figures are not loaded, etc.
+%   fleqn           - book class option. Left-align formulas.
+%   leqno           - book class option. Label formulas on the left-hand side instead of the right.
+\documentclass[apa]{manuscript}
 
 \usepackage[utf8]{inputenc}
 
@@ -13,7 +19,7 @@
 \usepackage{subcaption}
 
 \usepackage{graphicx}
-\graphicspath{{images/}}  % No need to prepend images/ to the path.
+\graphicspath{{images}}  % No need to prepend images/ to the path.
 
 % Other useful packages
 % \usepackage{pgfplots}
@@ -21,20 +27,18 @@
 % \usepackage{glossaries-extra}
 
 % Bibliography using biblatex
-\usepackage[backref,bibstyle=ieee,citestyle=numeric-comp,dashed=false,sorting=nty]{biblatex}  % IEEE style (sorted)
-% \usepackage[backref,style=apa]{biblatex}  % APA style (7th edition)
-% \setlength\bibitemsep{0.3\baselineskip}  % For APA style: add a bit of separation between bib items
+\usepackage[backref]{biblatex}
 \addbibresource{references.bib}
 
 % These two must be loaded last:
-\usepackage[breaklinks]{hyperref}
+\usepackage[breaklinks,colorlinks]{hyperref}
 % Support for easy cross-referencing. Should be loaded after hyperref.
 \usepackage[capitalize]{cleveref}
 
 \begin{document}
 
 \frontmatter
-\makeprelims
+\printpreliminarypages
 
 \mainmatter
 % The guide outlined in these chapters was created by Dr. Rowel Atienza.

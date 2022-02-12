@@ -1,25 +1,53 @@
+% Copyright 2022 Darwin Bautista
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     https://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{manuscript}[2022/02/08 NGSE Manuscript]
+\ProvidesClass{manuscript}[2022/02/12 NGSE Manuscript]
 
 \LoadClass[12pt,oneside]{book}
 \RequirePackage[T1]{fontenc}
 
-% --- Class Options: proposal, review, and double ---
+\RequirePackage{afterpackage}
 \RequirePackage{etoolbox}
-\newtoggle{proposal}  % Proposal version
-\newtoggle{review}  % Review version
-\newtoggle{double}  % Use double spacing
+\newtoggle{onehalfspacing}
+\newtoggle{lineno}
+\newtoggle{proposal}
+
+% --- Class Options ---
+% Use 1.5 line spacing
+\DeclareOption{onehalfspacing}{\toggletrue{onehalfspacing}}
+% Show line numbers
+\DeclareOption{lineno}{\toggletrue{lineno}}
+% Proposal version
 \DeclareOption{proposal}{\toggletrue{proposal}}
-\DeclareOption{review}{\toggletrue{review}}
-\DeclareOption{double}{\toggletrue{double}}
+% Use customized biblatex styles
+\DeclareOption{ieee}{\PassOptionsToPackage{bibstyle=ieee,citestyle=numeric-comp,sorting=nty,dashed=false}{biblatex}}
+\DeclareOption{apa}{%
+    \PassOptionsToPackage{style=apa}{biblatex}
+    \AfterPackage{biblatex}{\setlength\bibitemsep{0.3\baselineskip}}  % add a bit of separation between bib items
+}
+% Expose some options of the book class
+\DeclareOption{draft}{\PassOptionsToClass{draft}{book}}
+\DeclareOption{fleqn}{\PassOptionsToClass{fleqn}{book}}
+\DeclareOption{leqno}{\PassOptionsToClass{leqno}{book}}
 \DeclareOption*{\ClassWarning{manuscript}{Unknown option '\CurrentOption'}}
 \ProcessOptions\relax
 
 % --- Metadata ---
 \input{metadata}
-\title{\thesistitle}
-\author{\student}
-\date{\submissiondate}
+\title{\Title}
+\author{\Student}
+\date{\SubmissionDate}
 
 % --- Page size and margins ---
 \RequirePackage[margin=1in,\iftoggle{proposal}{a4}{left=1.5in,letter}paper]{geometry}
@@ -27,7 +55,7 @@
 % --- Indents and spacing ---
 \setlength{\parindent}{0.5in}  % Half-inch indents
 \RequirePackage{indentfirst}  % Indent the first paragraph of a section
-\RequirePackage[\iftoggle{double}{doublespacing}{onehalfspacing}]{setspace}  % Set line spacing globally
+\RequirePackage[\iftoggle{onehalfspacing}{onehalfspacing}{doublespacing}]{setspace}  % Set line spacing globally
 
 % --- Hyphenation and typesetting ---
 \RequirePackage[english]{babel}
@@ -45,29 +73,23 @@
 \RequirePackage[font=small,labelfont=it]{caption}  % Use small font, italicize caption label
 % Combine chapter number and title in a single line
 \RequirePackage{titlesec}
-\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter.}{20pt}{}
+\newcommand{\chaptertitleformat}{\singlespacing\normalfont\huge\bfseries}
+\titleformat{\chapter}{\chaptertitleformat}{\thechapter.}{20pt}{}
 \pagestyle{plain}  % No headers; page numbers at bottom-center of page
 
 % --- ToC tweaks ---
 \addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}  % Rename ToC
 \RequirePackage{tocbibind}  % Add the ToC and bibliography (if using BibTeX) to the ToC
+\PassOptionsToPackage{titletoc}{appendix}  % Prepend 'Appendix ' to each listing in the ToC
 
 % --- Package Hooks: configure packages loaded by main.tex ---
-\RequirePackage{afterpackage}
-\AfterPackage{appendix}{%
-    \appendixtitletocon  % Prepend 'Appendix ' to each listing in the ToC
-}
-\AfterPackage{biblatex}{%
-    \setcounter{biburlnumpenalty}{9000}  % Make sure long URLs have line breaks
-}
-\AfterPackage{hyperref}{%
-    \hypersetup{
+\AfterPackage{biblatex}{\setcounter{biburlnumpenalty}{9000}}  % Make sure long URLs have line breaks
+\AfterPackage{hyperref}{\hypersetup{%
     pdflang=en-PH,
-    pdftitle=\mstitle,
-    pdfauthor=\student,
-    pdfkeywords=\keywords,
-    pdfsubject=\degree,
-    \iftoggle{review}{colorlinks}{hidelinks}  % color links for the review version
+    pdftitle=\Title,
+    pdfauthor=\Student,
+    pdfkeywords=\Keywords,
+    pdfsubject=\Degree
 }}
 \AfterPackage{cleveref}{%
     \crefname{section}{Sec.}{Secs.}
@@ -76,8 +98,10 @@
     \Crefname{table}{Table}{Tables}
 }
 
-% --- \makeprelims command ---
-\newcommand{\makeprelims}{%
+% --- \printpreliminarypages command ---
+\newcommand{\printpreliminarypages}{%
+{% Center acknowledgment and abstract chapter titles.
+\titleformat{\chapter}{\centering\chaptertitleformat}{}{}{}
 \iftoggle{proposal}{%
     {\singlespacing\input{prelim_pages/title_proposal}}
 }{%
@@ -86,12 +110,13 @@
     \input{prelim_pages/univ_permission}
     \input{prelim_pages/approval}
     }
-    \input{prelim_pages/acknowledgment}
+    \input{prelim_pages/acknowledgments}
 }
 \input{prelim_pages/abstract}
+}
     {%
     \singlespacing
-    \hypersetup{hidelinks}  % Hide links for these pages even for the review version
+    \hypersetup{hidelinks}  % Always hide links for these pages
     \microtypesetup{protrusion=false}  % Disable protrusion
     \tableofcontents
     \listoftables
@@ -99,8 +124,8 @@
     }
 }
 
-% --- Line numbers for review ---
-\iftoggle{review}{
+% --- Show line numbers ---
+\iftoggle{lineno}{
 \RequirePackage{lineno}
 \RequirePackage{color}
 \renewcommand{\linenumberfont}{\normalfont\footnotesize\sffamily\color[rgb]{.5,.5,1}}  % blue font color, larger font
@@ -123,15 +148,15 @@
 \RequirePackage{xspace}
 \makeatletter
 \DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
-\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+\newcommand\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
 
-\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
-\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
-\def\cf{\emph{cf}\onedot} \def\Cf{\emph{Cf}\onedot}
-\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
-\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
-\def\iid{i.i.d\onedot} \def\wolog{w.l.o.g\onedot}
-\def\etal{\emph{et al}\onedot}
+\newcommand\eg{\emph{e.g}\onedot} \newcommand\Eg{\emph{E.g}\onedot}
+\newcommand\ie{\emph{i.e}\onedot} \newcommand\Ie{\emph{I.e}\onedot}
+\newcommand\cf{\emph{cf}\onedot} \newcommand\Cf{\emph{Cf}\onedot}
+\newcommand\etc{\emph{etc}\onedot} \newcommand\vs{\emph{vs}\onedot}
+\newcommand\wrt{w.r.t\onedot} \newcommand\dof{d.o.f\onedot}
+\newcommand\iid{i.i.d\onedot} \newcommand\wolog{w.l.o.g\onedot}
+\newcommand\etal{\emph{et al}\onedot}
 \makeatother
 
 \endinput

@@ -7,8 +7,9 @@
 ## Features
 - Clean and minimal template with sane defaults. Styling tweaks and enhancements are self-contained in the `manuscript` document class.
 - Includes all required preliminary pages.
-- Class options to easily toggle `review`, `proposal`, and `double`-spaced versions (see [lines 1-4 of `main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L4)).
-- `review` option makes the review process easier. It enables colored links and line numbering.
+- Class options to easily toggle proposal version, line numbering, etc. (see [lines 1-9 of `main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L9)).
+- `lineno` option makes the review process easier. It enables line numbering.
+- *Enhanced* IEEE and APA styles for `biblatex`. See `ieee` and `apa` options.
 - Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template).
 - Preconfigured with support for cross- and back-references.
 - Uses modern packages: `biblatex` for the bibliography, `newtx` for the Times Roman font (text and math).
@@ -21,22 +22,31 @@
 
 **NOTE:** `chapters/4-methodology.tex` contains important information regarding style and formatting (`\autocite{...}`, cross-references, abbreviations, etc.) that were adapted from the CVPR 2022 template.
 
+## Class Options
+| Option           | Description                        |  Remarks                                                                                                   |
+|:----------------:|------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `onehalfspacing` | Set line spacing to 1.5            | Double-spacing is the default                                                                              |
+| `lineno`         | Enable line numbering              | Enables reviewers to reference exact lines from the manuscript.                                            |
+| `proposal`       | Proposal version of the manuscript | Uses a simpler title page and excludes `univ_permission`, `approval`, and `acknowledgments`.               |
+| `ieee`           | Use IEEE-style bibliography        | Customized `ieee` style. Sorts by authors, citations are combined in brackets, disables dashed bib etries. |
+| `apa`            | Use APA-style bibliography         | Essentially the `apa` style with increased spacing between bib items                                       |
+| `draft`          | `draft` option of the `book` class | Faster typesetting. Figures are not loaded, etc. Globally affects some packages too (e.g. `hyperref`)      |
+| `fleqn`          | `fleqn` option of the `book` class | Left-align formulas                                                                                        |
+| `leqno`          | `leqno` option of the `book` class | Label formulas on the left-hand side instead of the right.                                                 |
+
 ## Comparison with the NGSE template
-| &nbsp;           | NGSE template<sup>1</sup> | This template<sup>2</sup>           | Remarks                              |
-|:----------------:|:-------------------------:|:-----------------------------------:|--------------------------------------|
-| **Page size**    | letter                    | letter (final), A4 (proposal)       | Toggled by `proposal` option         |
-| **Margins**      | 1",left=1.5"              | 1",left=1.5" (final); 1" (proposal) | Toggled by `proposal` option         |
-| **Indents**      | 0.5"                      | 0.5"                                |                                      |
-| **Line spacing** | double                    | 1.5 (default), double               | Toggled by `double` option           |
-| **Page numbers** | upper-right               | bottom-center                       |                                      |
-| **Typeface**     | Times New Roman           | Times Roman                         |                                      |
-| **Point size**   | 12pt                      | 12pt                                |                                      |
-| **Captions**     | 12pt, *italic* label      | 11pt, *italic* label                |                                      |
-| **Bib style**    | APA-like                  | IEEE (default)                      | Configurable, e.g. `style=apa`       |
+| &nbsp;           | NGSE template<sup>1</sup> | This template                             | Remarks                      |
+|:----------------:|:-------------------------:|:-----------------------------------------:|------------------------------|
+| **Page size**    | letter                    | letter (default), A4                      | See `proposal` option        |
+| **Margins**      | 1",left=1.5"              | 1",left=1.5" (default); 1"                | See `proposal` option        |
+| **Indents**      | 0.5"                      | 0.5"                                      |                              |
+| **Line spacing** | double                    | double (default), 1.5                     | See `onehalfspacing` option  |
+| **Page numbers** | upper-right               | bottom-center                             |                              |
+| **Typeface**     | Times New Roman, 12pt     | Times Roman, 12pt                         |                              |
+| **Captions**     | 12pt, *italic* label      | 11pt, *italic* label                      |                              |
+| **Bib style**    | APA-like                  | `numeric` (`biblatex` default), APA, IEEE | See `ieee` and `apa` options |
 
-**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, the sizes used for chapter and section titles are inconsistent.
-
-**<sup>2</sup>** In the `proposal` version, a simpler title page is used (`title_proposal`) and the following preliminary pages are excluded: `univ_permission`, `approval`, and `acknowledgment`.
+**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, the sizes used for section headings are inconsistent.
 
 ## License
 This project is licensed under the Apache License 2.0. See `LICENSE` for details.
