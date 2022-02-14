@@ -14,45 +14,48 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{manuscript}[2022/02/12 NGSE Manuscript]
 
-\LoadClass[12pt,oneside]{book}
-\RequirePackage[T1]{fontenc}
-
-\RequirePackage{afterpackage}
-\RequirePackage{etoolbox}
-\newtoggle{onehalfspacing}
-\newtoggle{lineno}
-\newtoggle{proposal}
+% listof=totoc: add List of Tables, Figures to ToC
+% captions=tableheading: adjusts the caption spacing of tables (placed above)
+\LoadClass[12pt,oneside,listof=totoc,captions=tableheading]{scrbook}
 
 % --- Class Options ---
+\RequirePackage{etoolbox}
+\newtoggle{onehalfspacing}
+\newtoggle{review}
+\newtoggle{proposal}
 % Use 1.5 line spacing
 \DeclareOption{onehalfspacing}{\toggletrue{onehalfspacing}}
-% Show line numbers
-\DeclareOption{lineno}{\toggletrue{lineno}}
+% Review version. Show line numbers and timestamp title page.
+\DeclareOption{review}{\toggletrue{review}}
 % Proposal version
 \DeclareOption{proposal}{\toggletrue{proposal}}
-% Use customized biblatex styles
+% Customized biblatex styles
 \DeclareOption{ieee}{\PassOptionsToPackage{bibstyle=ieee,citestyle=numeric-comp,sorting=nty,dashed=false}{biblatex}}
 \DeclareOption{apa}{%
     \PassOptionsToPackage{style=apa}{biblatex}
     \AfterPackage{biblatex}{\setlength\bibitemsep{0.3\baselineskip}}  % add a bit of separation between bib items
 }
-% Expose some options of the book class
-\DeclareOption{draft}{\PassOptionsToClass{draft}{book}}
-\DeclareOption{fleqn}{\PassOptionsToClass{fleqn}{book}}
-\DeclareOption{leqno}{\PassOptionsToClass{leqno}{book}}
+% Expose some options of the book/scrbook class
+\DeclareOption{draft}{\PassOptionsToClass{draft}{scrbook}}
+\DeclareOption{fleqn}{\PassOptionsToClass{fleqn}{scrbook}}
+\DeclareOption{leqno}{\PassOptionsToClass{leqno}{scrbook}}
 \DeclareOption*{\ClassWarning{manuscript}{Unknown option '\CurrentOption'}}
 \ProcessOptions\relax
 
 % --- Metadata ---
-\input{metadata}
+\input{manuscript-meta}
 \title{\Title}
 \author{\Student}
 \date{\SubmissionDate}
+\PassOptionsToPackage{pdflang=en-PH,pdftitle={\Title},pdfauthor={\Student},pdfkeywords={\Keywords},pdfsubject={\Degree}}{hyperref}
+% Infer manuscript type from the degree. FIXME: comparison should be case-insensitive
+\RequirePackage{xstring}
+\IfBeginWith{\Degree}{Master}{\newcommand\Type{Thesis}}{\newcommand\Type{Dissertation}}
 
 % --- Page size and margins ---
-\RequirePackage[margin=1in,\iftoggle{proposal}{a4}{left=1.5in,letter}paper]{geometry}
+\RequirePackage[margin=1in,footskip=0.56in,\iftoggle{proposal}{a4}{left=1.5in,letter}paper]{geometry}
 
-% --- Indents and spacing ---
+% --- Indents and line spacing ---
 \setlength{\parindent}{0.5in}  % Half-inch indents
 \RequirePackage{indentfirst}  % Indent the first paragraph of a section
 \RequirePackage[\iftoggle{onehalfspacing}{onehalfspacing}{doublespacing}]{setspace}  % Set line spacing globally
@@ -64,33 +67,26 @@
 
 % --- Fonts (load after babel) ---
 \RequirePackage{newtxtext}  % Use Times Roman fonts
+% FIXME: newtx 1.7 onwards has `amsthm` option which does the correct loading order:
 \RequirePackage{amsmath}
-\RequirePackage{amsthm}  % FIXME: newtx 1.7 onwards has `amsthm` option
+\RequirePackage{amsthm}
 \RequirePackage{newtxmath}  % Use Times Roman compatible math fonts
 \RequirePackage[zerostyle=d,straightquotes]{newtxtt}  % Enhancement of typewriter fonts
+\RequirePackage[T1]{fontenc}
 
 % --- General style tweaks ---
-\RequirePackage[font=small,labelfont=it]{caption}  % Use small font, italicize caption label
-% Combine chapter number and title in a single line
-\RequirePackage{titlesec}
-\newcommand{\chaptertitleformat}{\singlespacing\normalfont\huge\bfseries}
-\titleformat{\chapter}{\chaptertitleformat}{\thechapter.}{20pt}{}
-\pagestyle{plain}  % No headers; page numbers at bottom-center of page
+\addtokomafont{disposition}{\setstretch{1}\rmfamily}  % Use single-spaced Roman font for section headings
+\setcapindent{0pt}  % Don't indent captions
+\RequirePackage[font=small,labelfont=it,labelsep=space]{caption}  % Use small font, italicize caption label
+\pagestyle{plain}  % No headers
 
 % --- ToC tweaks ---
 \addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}  % Rename ToC
-\RequirePackage{tocbibind}  % Add the ToC and bibliography (if using BibTeX) to the ToC
+\setuptoc{toc}{totoc}  % Add a ToC entry to the ToC
 \PassOptionsToPackage{titletoc}{appendix}  % Prepend 'Appendix ' to each listing in the ToC
 
 % --- Package Hooks: configure packages loaded by main.tex ---
 \AfterPackage{biblatex}{\setcounter{biburlnumpenalty}{9000}}  % Make sure long URLs have line breaks
-\AfterPackage{hyperref}{\hypersetup{%
-    pdflang=en-PH,
-    pdftitle=\Title,
-    pdfauthor=\Student,
-    pdfkeywords=\Keywords,
-    pdfsubject=\Degree
-}}
 \AfterPackage{cleveref}{%
     \crefname{section}{Sec.}{Secs.}
     \Crefname{section}{Section}{Sections}
@@ -99,33 +95,40 @@
 }
 
 % --- \printpreliminarypages command ---
+% Smaller font size and centered chapter title for prelim pages
+\newcommand{\prelimchapterstyle}{\addtokomafont{chapter}{\LARGE}\let\raggedchapter\centering}
 \newcommand{\printpreliminarypages}{%
-{% Center acknowledgment and abstract chapter titles.
-\titleformat{\chapter}{\centering\chaptertitleformat}{}{}{}
 \iftoggle{proposal}{%
-    {\singlespacing\input{prelim_pages/title_proposal}}
+    \begin{singlespace}
+        \begin{titlepage}\input{prelim_pages/title_proposal}\end{titlepage}
+    \end{singlespace}
 }{%
-    {\singlespacing
-    \input{prelim_pages/title}
-    \input{prelim_pages/univ_permission}
-    \input{prelim_pages/approval}
-    }
-    \input{prelim_pages/acknowledgments}
+    \begin{singlespace}
+        \begin{titlepage}\input{prelim_pages/title}\end{titlepage}
+        \newpage
+        \input{prelim_pages/univ_permission}
+        \newpage
+        \phantomsection  % anchor for hyperref in ToC
+        \addcontentsline{toc}{chapter}{Approval Page}
+        \input{prelim_pages/approval}
+    \end{singlespace}
+    {\prelimchapterstyle\input{prelim_pages/acknowledgments}}
 }
-\input{prelim_pages/abstract}
-}
-    {%
-    \singlespacing
-    \hypersetup{hidelinks}  % Always hide links for these pages
+{\prelimchapterstyle\input{prelim_pages/abstract}}
+\begin{singlespace}
     \microtypesetup{protrusion=false}  % Disable protrusion
     \tableofcontents
     \listoftables
     \listoffigures
-    }
+\end{singlespace}
 }
 
-% --- Show line numbers ---
-\iftoggle{lineno}{
+% --- Review mode ---
+\iftoggle{review}{%
+% Add timestamp to the title page
+\RequirePackage{datetime2}
+\renewcommand{\SubmissionDate}{\texttt{\DTMnow}}
+% Show line numbers
 \RequirePackage{lineno}
 \RequirePackage{color}
 \renewcommand{\linenumberfont}{\normalfont\footnotesize\sffamily\color[rgb]{.5,.5,1}}  % blue font color, larger font
@@ -158,5 +161,8 @@
 \newcommand\iid{i.i.d\onedot} \newcommand\wolog{w.l.o.g\onedot}
 \newcommand\etal{\emph{et al}\onedot}
 \makeatother
+
+% FIXME: biblatex is using the obsolete command \tt for some reason.
+\let\tt\texttt
 
 \endinput

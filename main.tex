@@ -1,6 +1,6 @@
 % manuscript class options:
 %   onehalfspacing  - Use 1.5 line spacing instead of double.
-%   lineno          - Show line numbers. Useful for the review process.
+%   review          - Show line numbers and timestamp title page.
 %   proposal        - Use the proposal title page and exclude several preliminary pages.
 %   ieee            - Use customized IEEE biblatex style
 %   apa             - Use customized APA biblatex style
@@ -12,11 +12,11 @@
 \usepackage[utf8]{inputenc}
 
 % Include other packages here, before hyperref.
-\usepackage{appendix}  % Provides the appendices environment
 \usepackage{csquotes}
 \usepackage{enumerate}
 \usepackage{booktabs}
 \usepackage{subcaption}
+\usepackage{appendix}  % Provides the appendices environment
 
 \usepackage{graphicx}
 \graphicspath{{images}}  % No need to prepend images/ to the path.
@@ -31,7 +31,7 @@
 \addbibresource{references.bib}
 
 % These two must be loaded last:
-\usepackage[breaklinks,colorlinks]{hyperref}
+\usepackage[breaklinks]{hyperref}
 % Support for easy cross-referencing. Should be loaded after hyperref.
 \usepackage[capitalize]{cleveref}
 
@@ -50,7 +50,9 @@
 \input{chapters/6-analysis}
 \input{chapters/7-conclusion}
 
-{\singlespacing\printbibliography[heading=bibintoc]}
+\begin{singlespace}
+\printbibliography[heading=bibintoc]
+\end{singlespace}
 
 % Seems redundant, but we need \appendix so that cross-references will be shown as "Appendix..." and not as "Chapter..." or Section.
 % Usage of the appendices environment is required to change the ToC entries to "Appendix A" instead of just "A".
