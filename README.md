@@ -43,7 +43,7 @@
 | **Line spacing** | double                    | double (default), 1.5                     | See `onehalfspacing` option  |
 | **Page numbers** | upper-right               | bottom-center                             |                              |
 | **Typeface**     | Times New Roman, 12pt     | Times Roman, 12pt                         |                              |
-| **Captions**     | 12pt, *italic* label      | 11pt, *italic* label                      |                              |
+| **Captions**     | *italic* label, 12pt      | *italic* label, 10pt, 8pt (subcaption)    |                              |
 | **Bib style**    | APA-like                  | APA, IEEE                                 | See `apa` and `ieee` options |
 
 **<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, the sizes used for section headings are inconsistent.
@@ -52,8 +52,8 @@
 ### Why are links in the document enclosed in boxes?
 This is the default behavior of `hyperref`. The boxes are visible only on-screen; they do not appear in print. You may specify `colorlinks` to color the link text instead of showing boxes, or `hidelinks` to fully disable any visual link styling.
 
-### Why are `\chapter{...}` commands wrapped in a `singlespace` environment?
-Doing so ensures that chapter titles are always single-spaced regardless of the global line spacing (1.5 or double).
+### What is `\sschapter{...}`?
+It is *essentially* `\chapter{...}`, but it ensures that chapter titles are always single-spaced regardless of the global line spacing (1.5 or double).
 
 ### Can I use a bib style other than APA or IEEE?
 Yes. Remove the `apa` or `ieee` option from the `manuscript` document class, then configure `biblatex` as desired.

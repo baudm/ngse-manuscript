@@ -53,7 +53,7 @@
 \IfBeginWith{\Degree}{Master}{\newcommand\Type{Thesis}}{\newcommand\Type{Dissertation}}
 
 % --- Page size and margins ---
-\RequirePackage[margin=1in,footskip=0.56in,\iftoggle{proposal}{a4}{left=1.5in,letter}paper]{geometry}
+\RequirePackage[margin=1in,footskip=0.6in,\iftoggle{proposal}{a4}{left=1.5in,letter}paper]{geometry}
 
 % --- Indents and line spacing ---
 \setlength{\parindent}{0.5in}  % Half-inch indents
@@ -75,9 +75,11 @@
 \RequirePackage[T1]{fontenc}
 
 % --- General style tweaks ---
-\addtokomafont{disposition}{\setstretch{1}\rmfamily}  % Use single-spaced Roman font for section headings
+\addtokomafont{disposition}{\linespread{1}\selectfont\rmfamily}  % Use single-spaced Roman font for section headings
+\setkomafont{caption}{\footnotesize}  % Smaller font
+\setkomafont{captionlabel}{\itshape}  % Italic caption label
+\renewcommand*{\captionformat}{~}  % Space separator
 \setcapindent{0pt}  % Don't indent captions
-\RequirePackage[font=small,labelfont=it,labelsep=space]{caption}  % Use small font, italicize caption label
 \pagestyle{plain}  % No headers
 
 % --- ToC tweaks ---
@@ -145,6 +147,14 @@
 \leftlinenumbers  % Re-issue [left] option
 \linenumbers
 }{}
+
+% \sschapter wraps \chapter in a singlespace "environment"
+\makeatletter
+\newcommand{\sschapter}{\@ifstar{\sschapter@star}{\sschapter@nostar}}
+\newcommand{\sschapter@nostar}{\@dblarg\@sschapter@nostar}
+\def\@sschapter@nostar[#1]#2{\singlespace\chapter[#1]{#2}\iftoggle{onehalfspacing}{\onehalfspacing}{\doublespacing}}
+\newcommand{\sschapter@star}[1]{\singlespace\chapter*{#1}\iftoggle{onehalfspacing}{\onehalfspacing}{\doublespacing}}
+\makeatother
 
 % --- Abbreviations (extracted from CVPR template) ---
 % Add a period to the end of an abbreviation unless there's one already, then \xspace.
