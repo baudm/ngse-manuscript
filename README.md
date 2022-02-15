@@ -10,7 +10,7 @@
 - Class options to easily toggle proposal version, line numbering, etc. (see [lines 1-9 of `main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L9)).
 - `review` option makes the review process easier. It enables line numbering and timestamps the title page.
 - *Enhanced* IEEE and APA styles for `biblatex`. See `ieee` and `apa` options.
-- Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template).
+- Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template). See [`manuscript.cls`](https://github.com/baudm/ngse-manuscript/blob/main/manuscript.cls#L168-L174).
 - Preconfigured with support for cross- and back-references.
 - Uses modern packages: `scrbook` document class, `biblatex` for the bibliography, `newtx` for the Times Roman font (text and math).
 
@@ -49,23 +49,20 @@
 **<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, the sizes used for section headings are inconsistent.
 
 ## FAQ
-### Why are links in the document enclosed in boxes?
-This is the default behavior of `hyperref`. The boxes are visible only on-screen; they do not appear in print. You may specify `colorlinks` to color the link text instead of showing boxes, or `hidelinks` to fully disable any visual link styling.
-
-### What is `\sschapter{...}`?
-It is *essentially* `\chapter{...}`, but it ensures that chapter titles are always single-spaced regardless of the global line spacing (1.5 or double).
+### How is the manuscript type (thesis, dissertation) determined?
+It is inferred from the `\Degree`. Note that the string comparison is case-sensitive. Make sure to input "Master..." or "Doctor..."
 
 ### Can I use a bib style other than APA or IEEE?
 Yes. Remove the `apa` or `ieee` option from the `manuscript` document class, then configure `biblatex` as desired.
+
+### Why are links in the document enclosed in boxes?
+This is the default behavior of `hyperref`. The boxes are visible only on-screen; they do not appear in print. You may specify `colorlinks` to color the link text instead of showing boxes, or `hidelinks` to fully disable any visual link styling.
 
 ### Can I use package *X* instead of `biblatex`, `cleveref`, etc.?
 The packages *required* in the `manuscript` class are required. These are generally the *go-to* packages used by most documents. The packages in `main.tex` are recommended but not required and can be replaced. However, some of these packages are preconfigured by the `manuscript` class for your convenience.
 
 ### What should I do if I have a specific formatting requirement not covered by the template (e.g. multiple advisers)?
 You can directly edit the preliminary pages under `prelim_pages/`, or modify the `\printpreliminarypages` command either directly or by declaring it. The `manuscript` class should handle most cases well.
-
-### How is the manuscript type (thesis, dissertation) determined?
-It is inferred from the `\Degree`. Note that the string comparison is case-sensitive. Make sure to input "Master..." or "Doctor..."
 
 ## License
 This project is licensed under the Apache License 2.0. See `LICENSE` for details.

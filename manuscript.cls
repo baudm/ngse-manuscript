@@ -118,6 +118,7 @@
 }
 {\prelimchapterstyle\input{prelim_pages/abstract}}
 \begin{singlespace}
+    \let\chapter\origchapter  % Use orig command to prevent line spacing changes
     \microtypesetup{protrusion=false}  % Disable protrusion
     \tableofcontents
     \listoftables
@@ -148,12 +149,13 @@
 \linenumbers
 }{}
 
-% \sschapter wraps \chapter in a singlespace "environment"
+% Wrap \chapter in a single-space env to avoid unnecessary whitespace
+\NewCommandCopy\origchapter\chapter
 \makeatletter
-\newcommand{\sschapter}{\@ifstar{\sschapter@star}{\sschapter@nostar}}
-\newcommand{\sschapter@nostar}{\@dblarg\@sschapter@nostar}
-\def\@sschapter@nostar[#1]#2{\singlespace\chapter[#1]{#2}\iftoggle{onehalfspacing}{\onehalfspacing}{\doublespacing}}
-\newcommand{\sschapter@star}[1]{\singlespace\chapter*{#1}\iftoggle{onehalfspacing}{\onehalfspacing}{\doublespacing}}
+\renewcommand{\chapter}{\@ifstar{\chapter@star}{\chapter@nostar}}
+\newcommand{\chapter@nostar}{\@dblarg\@chapter@nostar}
+\def\@chapter@nostar[#1]#2{\singlespace\origchapter[#1]{#2}\iftoggle{onehalfspacing}{\onehalfspacing}{\doublespacing}}
+\newcommand{\chapter@star}[1]{\singlespace\origchapter*{#1}\iftoggle{onehalfspacing}{\onehalfspacing}{\doublespacing}}
 \makeatother
 
 % --- Abbreviations (extracted from CVPR template) ---
