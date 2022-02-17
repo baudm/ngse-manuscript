@@ -7,10 +7,10 @@
 ## Features
 - Clean and minimal template with sane defaults. Styling tweaks and enhancements are self-contained in the `manuscript` document class.
 - Includes all required preliminary pages.
-- Class options to easily toggle proposal version, line numbering, etc. (see [lines 1-9 of `main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L9)).
+- Class options to easily toggle proposal version, line numbering, etc. (see [`main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L7)).
 - `review` option makes the review process easier. It enables line numbering and timestamps the title page.
 - *Enhanced* IEEE and APA styles for `biblatex`. See `ieee` and `apa` options.
-- Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template). See [`manuscript.cls`](https://github.com/baudm/ngse-manuscript/blob/main/manuscript.cls#L168-L174).
+- Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template). See [`manuscript.cls`](https://github.com/baudm/ngse-manuscript/blob/main/manuscript.cls#L76-L82).
 - Preconfigured with support for cross- and back-references.
 - Uses modern packages: `scrbook` document class, `biblatex` for the bibliography, `newtx` for the Times Roman font (text and math).
 
@@ -25,14 +25,12 @@
 ## Class Options
 | Option           | Description                        |  Remarks                                                                                                   |
 |:----------------:|------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `onehalfspacing` | Set line spacing to 1.5            | Double-spacing is the default                                                                              |
-| `review`         | Enable review mode                 | Enables line numbering and timestamps the title page using the *Date of Submission*.                       |
 | `proposal`       | Proposal version of the manuscript | Uses a simpler title page and excludes `univ_permission`, `approval`, and `acknowledgments`.               |
+| `review`         | Enable review mode                 | Enables line numbering and timestamps the title page using the *Date of Submission*.                       |
+| `onehalfspacing` | Set line spacing to 1.5            | Double-spacing is the default                                                                              |
 | `ieee`           | Use IEEE-style bibliography        | Customized `ieee` style. Sorts by authors, citations are combined in brackets, disables dashed bib etries. |
 | `apa`            | Use APA-style bibliography         | Essentially the `apa` style with increased spacing between bib items                                       |
-| `draft`          | `draft` option of the `book` class | Faster typesetting. Figures are not loaded, etc. Globally affects some packages too (e.g. `hyperref`)      |
-| `fleqn`          | `fleqn` option of the `book` class | Left-align formulas                                                                                        |
-| `leqno`          | `leqno` option of the `book` class | Label formulas on the left-hand side instead of the right.                                                 |
+| `amsthm`         | Use the `amsthm` package           | Added as an option to ensure correct loading order.                                                        |
 
 ## Comparison with the NGSE template
 | &nbsp;           | NGSE template<sup>1</sup> | This template                             | Remarks                      |

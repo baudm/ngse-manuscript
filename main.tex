@@ -1,12 +1,10 @@
 % manuscript class options:
-%   onehalfspacing  - Use 1.5 line spacing instead of double.
-%   review          - Show line numbers and timestamp title page.
 %   proposal        - Use the proposal title page and exclude several preliminary pages.
+%   review          - Show line numbers and timestamp title page.
+%   onehalfspacing  - Use 1.5 line spacing instead of double.
 %   ieee            - Use customized IEEE biblatex style
 %   apa             - Use customized APA biblatex style
-%   draft           - book class option. Faster typesetting. Figures are not loaded, etc.
-%   fleqn           - book class option. Left-align formulas.
-%   leqno           - book class option. Label formulas on the left-hand side instead of the right.
+%   amsthm          - Use the `amsthm` package. Added as an option to ensure correct loading order.
 \documentclass[apa]{manuscript}
 
 \usepackage[utf8]{inputenc}
@@ -26,7 +24,7 @@
 % \usepackage{siunitx}
 % \usepackage{glossaries-extra}
 
-% Bibliography using biblatex
+% Bibliography
 \usepackage[backref]{biblatex}
 \addbibresource{references.bib}
 
