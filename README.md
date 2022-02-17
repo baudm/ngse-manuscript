@@ -25,7 +25,7 @@
 ## Class Options
 | Option           | Description                        |  Remarks                                                                                                   |
 |:----------------:|------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `proposal`       | Proposal version of the manuscript | Uses a simpler title page and excludes `univ_permission`, `approval`, and `acknowledgments`.               |
+| `proposal`       | Proposal version of the manuscript | Uses A4 paper, 1" margins, a simpler title page and excludes `univ_permission`, `approval`, and `acknowledgments`.               |
 | `review`         | Enable review mode                 | Enables line numbering and timestamps the title page using the *Date of Submission*.                       |
 | `onehalfspacing` | Set line spacing to 1.5            | Double-spacing is the default                                                                              |
 | `ieee`           | Use IEEE-style bibliography        | Customized `ieee` style. Sorts by authors, citations are combined in brackets, disables dashed bib etries. |
@@ -44,14 +44,14 @@
 | **Captions**     | *italic* label, 12pt      | *italic* label, 10pt, 8pt (subcaption)    |                              |
 | **Bib style**    | APA-like                  | APA, IEEE                                 | See `apa` and `ieee` options |
 
-**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, the sizes used for section headings are inconsistent.
+**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, other style parameters are not well-defined.
 
 ## FAQ
 ### How is the manuscript type (thesis, dissertation) determined?
-It is inferred from the `\Degree`. Note that the string comparison is case-sensitive. Make sure to input "Master..." or "Doctor..."
+It is inferred from the `\Degree`. Note that the string comparison is currently case-sensitive. Make sure to input "Master..." or "Doctor..."
 
 ### Can I use a bib style other than APA or IEEE?
-Yes. Remove the `apa` or `ieee` option from the `manuscript` document class, then configure `biblatex` as desired.
+Yes. In `main.tex`, remove the `apa` or `ieee` option from the `manuscript` document class, then configure `biblatex` as desired.
 
 ### Why are links in the document enclosed in boxes?
 This is the default behavior of `hyperref`. The boxes are visible only on-screen; they do not appear in print. You may specify `colorlinks` to color the link text instead of showing boxes, or `hidelinks` to fully disable any visual link styling.
@@ -60,7 +60,7 @@ This is the default behavior of `hyperref`. The boxes are visible only on-screen
 The packages *required* in the `manuscript` class are required. These are generally the *go-to* packages used by most documents. The packages in `main.tex` are recommended but not required and can be replaced. However, some of these packages are preconfigured by the `manuscript` class for your convenience.
 
 ### What should I do if I have a specific formatting requirement not covered by the template (e.g. multiple advisers)?
-You can directly edit the preliminary pages under `prelim_pages/`, or modify the `\printpreliminarypages` command either directly or by declaring it. The `manuscript` class should handle most cases well.
+You can directly edit the preliminary pages under `prelim_pages/`, or modify the `\printpreliminarypages` command either directly or by declaring it. The `manuscript` class should handle most cases well, but feel free to create a new issue and/or pull request if necessary.
 
 ## License
 This project is licensed under the Apache License 2.0. See `LICENSE` for details.
