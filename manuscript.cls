@@ -134,14 +134,23 @@
     \Crefname{table}{Table}{Tables}
 }
 
-% --- Wrap \chapter in a singlespace env for consistency with prelim pages ---
+% --- Wrap \chapter in a singlespace env for vspace consistency ---
 \NewCommandCopy\chapter@orig\chapter
-\newcommand{\@restorespacing}{\iftoggle{onehalfspacing}{\onehalfspacing}{\doublespacing}}
 \renewcommand{\chapter}{\@ifstar{\chapter@star}{\@dblarg\chapter@nostar}}
-\def\chapter@nostar[#1]#2{\singlespace\chapter@orig[#1]{#2}\@restorespacing}
-\newcommand{\chapter@star}[1]{\singlespace\chapter@orig*{#1}\@restorespacing}
-% Revert to orig command inside singlespace env to prevent unwanted line spacing changes
-\AtBeginEnvironment{singlespace}{\let\chapter\chapter@orig}
+\def\chapter@nostar[#1]#2{%
+\if \baselinestretch \setspace@singlespace  % Already single-spaced
+    \chapter@orig[#1]{#2}
+\else
+    \let\baselinestretch@orig\baselinestretch  % Save original spacing
+    \singlespace\chapter@orig[#1]{#2}\setstretch{\baselinestretch@orig}
+\fi}
+\newcommand{\chapter@star}[1]{%
+\if \baselinestretch \setspace@singlespace  % Already single-spaced
+    \chapter@orig*{#1}
+\else
+    \let\baselinestretch@orig\baselinestretch  % Save original spacing
+    \singlespace\chapter@orig*{#1}\setstretch{\baselinestretch@orig}
+\fi}
 
 % --- Review mode ---
 \iftoggle{review}{%
