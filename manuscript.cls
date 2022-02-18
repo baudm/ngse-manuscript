@@ -136,21 +136,17 @@
 
 % --- Wrap \chapter in a singlespace env for vspace consistency ---
 \NewCommandCopy\chapter@orig\chapter
-\renewcommand{\chapter}{\@ifstar{\chapter@star}{\@dblarg\chapter@nostar}}
-\def\chapter@nostar[#1]#2{%
-\if \baselinestretch \setspace@singlespace  % Already single-spaced
-    \chapter@orig[#1]{#2}
-\else
-    \let\baselinestretch@orig\baselinestretch  % Save original spacing
-    \singlespace\chapter@orig[#1]{#2}\setstretch{\baselinestretch@orig}
-\fi}
-\newcommand{\chapter@star}[1]{%
-\if \baselinestretch \setspace@singlespace  % Already single-spaced
-    \chapter@orig*{#1}
-\else
-    \let\baselinestretch@orig\baselinestretch  % Save original spacing
-    \singlespace\chapter@orig*{#1}\setstretch{\baselinestretch@orig}
-\fi}
+\RequirePackage{xparse}
+\RenewDocumentCommand \chapter { s o m } {%
+    \edef\@optargs{\IfBooleanTF{#1}{*}{}\IfValueTF{#2}{[#2]}{}}
+    \if \baselinestretch \setspace@singlespace  % Already single-spaced
+        \expandafter\chapter@orig\@optargs{#3}
+    \else
+        \let\baselinestretch@orig\baselinestretch  % Save original spacing
+        \singlespace\expandafter\chapter@orig\@optargs{#3}
+        \setstretch{\baselinestretch@orig}         % Restore spacing
+    \fi
+}
 
 % --- Review mode ---
 \iftoggle{review}{%
