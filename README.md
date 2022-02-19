@@ -2,7 +2,7 @@
 
 ## Overview
 - Thesis manuscript template for the National Graduate School of Engineering (NGSE), UP Diliman.
-- Based on the `scrbook` document class. Follows the general styling of the [NGSE manuscript template](https://coe.upd.edu.ph/forms/).
+- Based on the [`scrbook`](http://mirrors.ctan.org/macros/latex/contrib/koma-script/doc/scrguien.pdf#chapter.3) document class. Follows the general styling of the [NGSE manuscript template](https://coe.upd.edu.ph/forms/).
 - Form and structure follows the guide created by [Dr. Rowel Atienza](https://github.com/roatienza). The outlines for each chapter were directly lifted from his guide.
 - See precompiled samples for the [proposal](https://github.com/baudm/ngse-manuscript/blob/main/samples/proposal.pdf) (APA-style bib) and [review version](https://github.com/baudm/ngse-manuscript/blob/main/samples/final_review.pdf) (IEEE-style bib) of the manuscript.
 
@@ -47,7 +47,7 @@
 | **Captions**     | *italic* label, 12pt      | *italic* label, 10pt, 8pt (subcaption)    |                              |
 | **Bib style**    | APA-like                  | APA, IEEE                                 | See `apa` and `ieee` options |
 
-**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Other than the base point size of 12pt, other style parameters are not well-defined.
+**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Not all style parameters are well-defined.
 
 ## FAQ
 ### How is the manuscript type (thesis, dissertation) determined?
@@ -63,7 +63,7 @@ This is the default behavior of `hyperref`. The boxes are visible only on-screen
 The packages *required* in the `manuscript` class are required. These are generally the *go-to* packages used by most documents. The packages in `main.tex` are recommended but not required and can be replaced. However, some of these packages are preconfigured by the `manuscript` class for your convenience.
 
 ### What should I do if I have a specific formatting requirement not covered by the template (e.g. multiple advisers)?
-You can directly edit the preliminary pages under `prelim_pages/`, or modify the `\printpreliminarypages` command either directly or by declaring it. The `manuscript` class should handle most cases well, but feel free to create a new issue and/or pull request if necessary.
+You can edit all content, including the preliminary pages (found under the `prelim_pages` directory), according to your needs. The `manuscript` class should handle most cases well. If you find yourself directly editing `manuscript.cls`, feel free to ask a question, or create a new issue and/or pull request.
 
 ## License
 This project is licensed under the Apache License 2.0. See `LICENSE` for details.
