@@ -138,7 +138,7 @@
 \NewCommandCopy\chapter@orig\chapter
 \RequirePackage{xparse}
 \RenewDocumentCommand \chapter { s o m } {%
-    \edef\@optargs{\IfBooleanTF{#1}{*}{}\IfValueTF{#2}{[#2]}{}}
+    \edef\@optargs{\IfBooleanT{#1}{*}\IfValueT{#2}{[#2]}}
     \if \baselinestretch \setspace@singlespace  % Already single-spaced
         \expandafter\chapter@orig\@optargs{#3}
     \else
