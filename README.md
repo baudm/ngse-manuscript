@@ -1,3 +1,5 @@
+![Preview of title page, ToC, chapter, and bibliography](preview.png "Preview of title page, ToC, chapter, and bibliography")
+
 ## Overview
 - Thesis manuscript template for the National Graduate School of Engineering (NGSE), UP Diliman.
 - Based on the `scrbook` document class. Follows the general styling of the [NGSE manuscript template](https://coe.upd.edu.ph/forms/).
@@ -5,20 +7,21 @@
 - See precompiled samples for the [proposal](https://github.com/baudm/ngse-manuscript/blob/main/samples/proposal.pdf) (APA-style bib) and [review version](https://github.com/baudm/ngse-manuscript/blob/main/samples/final_review.pdf) (IEEE-style bib) of the manuscript.
 
 ## Features
-- Clean and minimal template with sane defaults. Styling tweaks and enhancements are self-contained in the `manuscript` document class.
-- Includes all required preliminary pages.
-- Class options to easily toggle proposal version, line numbering, etc. (see [`main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L7)).
+- Clean, minimal, and well-documented template with sane defaults. Styling tweaks and enhancements are self-contained in the `manuscript` document class.
+- Includes all required preliminary pages (see `\printpreliminarypages` command).
+- [Class options](#class-options) to easily toggle proposal version, line numbering, etc. (see [`main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L8)).
 - `review` option makes the review process easier. It enables line numbering and timestamps the title page.
 - *Enhanced* IEEE and APA styles for `biblatex`. See `ieee` and `apa` options.
 - Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template). See [`manuscript.cls`](https://github.com/baudm/ngse-manuscript/blob/main/manuscript.cls#L76-L82).
-- Preconfigured with support for cross- and back-references.
+- Properly configured and integrated `microtype` for *"typographical perfection."*
 - Uses modern packages: `scrbook` document class, `biblatex` for the bibliography, `newtx` for the Times Roman font (text and math).
 
 ## Usage
 1. Edit `manuscript-meta.tex` and input your details (name, student number, etc.)
 2. Edit `main.tex` to add/remove chapters, appendices, packages, or switch between the camera-ready/review and proposal/final versions of the manuscript.
-3. Add/edit/remove chapters in the `chapters` directory.
+3. Create/edit/delete chapters in the `chapters` directory.
 4. Add BibTeX references to `references.bib`. Use `\autocite{...}` instead of `\cite{...}`.
+5. Modify the abstract, acknowledgments, and other preliminary pages in the `prelim_pages` directory.
 
 **NOTE:** `chapters/4-methodology.tex` contains important information regarding style and formatting (`\autocite{...}`, cross-references, abbreviations, etc.) that were adapted from the CVPR 2022 template.
 
