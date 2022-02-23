@@ -31,7 +31,7 @@
 | `proposal`       | Proposal version of the manuscript | Uses A4 paper, 1" margins, a simpler title page and excludes `univ_permission`, `approval`, and `acknowledgments`.               |
 | `review`         | Enable review mode                 | Enables line numbering and timestamps the title page using the *Date of Submission*.                       |
 | `onehalfspacing` | Set line spacing to 1.5            | Double-spacing is the default                                                                              |
-| `ieee`           | Use IEEE-style bibliography        | Customized `ieee` style. Sorts by authors, citations are combined in brackets, disables dashed bib etries. |
+| `ieee`           | Use IEEE-style bibliography        | Customized `ieee` style. Sorts by authors, citations are combined in brackets, disables dashed bib entries.|
 | `apa`            | Use APA-style bibliography         | Essentially the `apa` style with increased spacing between bib items                                       |
 | `amsthm`         | Use the `amsthm` package           | Added as an option to ensure correct loading order.                                                        |
 
