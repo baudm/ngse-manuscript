@@ -2,22 +2,37 @@
 
 This \MakeLowercase{\Type}, entitled \textbf{\MakeUppercase{\Title}}, prepared and submitted by \textbf{\MakeUppercase{\Student}}, in partial fulfillment of the requirements for the degree of \textbf{\MakeUppercase{\Degree}} is hereby accepted.\\[1.5cm]
 
-% Note: If PhD student, please include all panel members
-\begin{flushright}
-\begin{tabular}{c}
-\textbf{\MakeUppercase{\Adviser}}\\
-\Type\ Adviser
-\end{tabular}
-\end{flushright}
+% For PhD students, all panel members are included.
+\IfBeginWith{\Degree}{Master}{%
+    \begin{flushright}
+    \begin{tabular}{c}
+    \textbf{\MakeUppercase{\Adviser}}\\
+    \Type\ Adviser
+    \end{tabular}
+    \end{flushright}
+    \vspace{5cm}
+    \def\sigsep{2.5cm}
+}{%
+    \begin{center}
+    \begin{tabular*}{\textwidth}{@{}c@{\extracolsep{\fill}}c@{}}
+     & \textbf{\MakeUppercase{\Adviser}}\\
+     & \Type\ Adviser\\[2cm]
+    \textbf{\MakeUppercase{\Reader}} & \textbf{\MakeUppercase{\ReaderTwo}}\\
+    Panel Chair and Reader & Reader\\[2cm]
+    \textbf{\MakeUppercase{\PanelMemberOne}} & \textbf{\MakeUppercase{\PanelMemberTwo}}\\
+    Panel Member & Panel Member
+    \end{tabular*}
+    \end{center}
+    \vspace{2.5cm}
+    \def\sigsep{2cm}
+}
 
-\vspace{5cm}
-
-Accepted as partial fulfillment of the requirements for the degree of \textbf{\MakeUppercase{\Degree}}.\\[2cm]
+Accepted as partial fulfillment of the requirements for the degree of \textbf{\MakeUppercase{\Degree}}.\\[1.5cm]
 
 \begin{flushright}
 \begin{tabular}{c}
 \textbf{\MakeUppercase{\Director}}\\
-NGSE Director\\[2.5cm]
+NGSE Director\\[\sigsep]
 
 \textbf{\MakeUppercase{\Dean}}\\
 Dean
