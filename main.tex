@@ -2,6 +2,7 @@
 %   proposal        - Use the proposal title page and exclude several preliminary pages.
 %   review          - Show line numbers and timestamp title page.
 %   onehalfspacing  - Use 1.5 line spacing instead of double.
+%   pagenumhead     - Place page numbers in the header instead of the footer.
 %   ieee            - Use customized IEEE biblatex style
 %   apa             - Use customized APA biblatex style
 %   amsthm          - Use the `amsthm` package. Added as an option to ensure correct loading order.
@@ -10,7 +11,7 @@
 \usepackage[utf8]{inputenc}
 
 % Include other packages here, before hyperref.
-\usepackage{csquotes}
+\usepackage{csquotes}  % Added by default to make biblatex happy when used with babel
 \usepackage{enumerate}
 \usepackage{booktabs}
 \usepackage{subcaption}

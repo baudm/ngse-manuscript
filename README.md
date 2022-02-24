@@ -9,10 +9,10 @@
 ## Features
 - Clean, minimal, and well-documented template with sane defaults. Styling tweaks and enhancements are self-contained in the `manuscript` document class.
 - Includes all required preliminary pages (see `\printpreliminarypages` command).
-- [Class options](#class-options) to easily toggle proposal version, line numbering, etc. (see [`main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L8)).
+- [Class options](#class-options) to easily toggle proposal version, line numbering, etc. (see [`main.tex`](https://github.com/baudm/ngse-manuscript/blob/main/main.tex#L1-L9)).
 - `review` option makes the review process easier. It enables line numbering and timestamps the title page.
 - *Enhanced* IEEE and APA styles for `biblatex`. See `ieee` and `apa` options.
-- Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template). See [`manuscript.cls`](https://github.com/baudm/ngse-manuscript/blob/main/manuscript.cls#L76-L82).
+- Macros for common abbreviations such as `\eg` for *e.g.*, `\etal` for *et al.* and so on (extracted from the CVPR 2022 template). See [`manuscript.cls`](https://github.com/baudm/ngse-manuscript/blob/main/manuscript.cls#L81-L87).
 - Properly configured and integrated `microtype` for *"typographical perfection."*
 - Uses modern packages: `scrbook` document class, `biblatex` for the bibliography, `newtx` for the Times Roman font (text and math).
 
@@ -31,6 +31,7 @@
 | `proposal`       | Proposal version of the manuscript | Uses A4 paper, 1" margins, a simpler title page and excludes `univ_permission`, `approval`, and `acknowledgments`.               |
 | `review`         | Enable review mode                 | Enables line numbering and timestamps the title page using the *Date of Submission*.                       |
 | `onehalfspacing` | Set line spacing to 1.5            | Double-spacing is the default                                                                              |
+| `pagenumhead`    | Place page numbers in the header   | Page numbers are centered in the footer by default. This option places them in the top-right corner.       |
 | `ieee`           | Use IEEE-style bibliography        | Customized `ieee` style. Sorts by authors, citations are combined in brackets, disables dashed bib entries.|
 | `apa`            | Use APA-style bibliography         | Essentially the `apa` style with increased spacing between bib items                                       |
 | `amsthm`         | Use the `amsthm` package           | Added as an option to ensure correct loading order.                                                        |
@@ -42,12 +43,12 @@
 | **Margins**      | 1",left=1.5"              | 1",left=1.5" (default); 1"                | See `proposal` option        |
 | **Indents**      | 0.5"                      | 0.5"                                      |                              |
 | **Line spacing** | double                    | double (default), 1.5                     | See `onehalfspacing` option  |
-| **Page numbers** | upper-right               | bottom-center                             |                              |
+| **Page numbers** | top-right                 | bottom-center (default), top-right        | See `pagenumhead` option     |
 | **Typeface**     | Times New Roman, 12pt     | Times Roman, 12pt                         |                              |
 | **Captions**     | *italic* label, 12pt      | *italic* label, 10pt, 8pt (subcaption)    |                              |
 | **Bib style**    | APA-like                  | APA, IEEE                                 | See `apa` and `ieee` options |
 
-**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Not all style parameters are well-defined.
+**<sup>1</sup>** There are different versions of the template. One version uses a sans serif font, while another uses Times New Roman. Not all style parameters are well-defined, but some seem to be adapted from the APA 6 style.
 
 ## FAQ
 ### How is the manuscript type (thesis, dissertation) determined?

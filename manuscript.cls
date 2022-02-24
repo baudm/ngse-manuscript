@@ -12,27 +12,32 @@
 % See the License for the specific language governing permissions and
 % limitations under the License.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{manuscript}[2022/02/16 NGSE Manuscript]
+\ProvidesClass{manuscript}[2022/02/24 NGSE Manuscript]
 
 % ----- Class Options -----
 \RequirePackage{scrlfile}  % provides \AfterPackage{}
 \RequirePackage{etoolbox}
 \newtoggle{proposal}
 \newtoggle{review}
-\newtoggle{onehalfspacing}
 % Proposal version
 \DeclareOption{proposal}{\toggletrue{proposal}}
 % Review version. Show line numbers and timestamp title page.
 \DeclareOption{review}{\toggletrue{review}}
 % Use 1.5 line spacing instead of double
-\DeclareOption{onehalfspacing}{\toggletrue{onehalfspacing}}
+\DeclareOption{onehalfspacing}{\AtEndOfPackage{\onehalfspacing}}
+% Place page numbers in the header instead of the footer
+\DeclareOption{pagenumhead}{\AtEndOfPackage{%
+    \RequirePackage[singlespacing=true]{scrlayer-scrpage}
+    \clearpairofpagestyles  % Remove page numbers from the footer
+    \ohead[\pagemark]{\pagemark}  % Place page numbers in the "outer" part of header (top-right for one-side)
+}}
 % Customized biblatex styles
 \DeclareOption{ieee}{\PassOptionsToPackage{bibstyle=ieee,citestyle=numeric-comp,sorting=nty,dashed=false}{biblatex}}
 \DeclareOption{apa}{%
     \PassOptionsToPackage{style=apa}{biblatex}
     \AfterPackage{biblatex}{\setlength\bibitemsep{0.2\baselineskip}}  % add a bit of separation between bib items
 }
-% Use the `amsthm` package. Added as an option to ensure correct loading order.
+% Use the `amsthm` package. Added as an option to ensure correct loading order w.r.t. newtx.
 \DeclareOption{amsthm}{\RequirePackage{amsmath,amsthm}}
 % Pass unknown options to the scrbook class
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
@@ -100,7 +105,7 @@
 % --- Indents and line spacing ---
 \setlength{\parindent}{0.5in}  % Half-inch indents
 \RequirePackage{indentfirst}  % Indent the first paragraph of a section
-\RequirePackage[\iftoggle{onehalfspacing}{onehalfspacing}{doublespacing}]{setspace}  % Set line spacing globally
+\RequirePackage[doublespacing]{setspace}  % Set line spacing globally
 
 % --- Hyphenation and typesetting ---
 \RequirePackage[english]{babel}
