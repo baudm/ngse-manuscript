@@ -134,8 +134,9 @@
 \setuptoc{toc}{totoc}  % Add a ToC entry to the ToC
 \PassOptionsToPackage{titletoc}{appendix}  % Prepend 'Appendix ' to each listing in the ToC
 
-% --- Package Hooks: configure packages loaded by main.tex ---
+% --- Configure packages loaded by main.tex ---
 \AfterPackage{biblatex}{\setcounter{biburlnumpenalty}{9000}}  % Make sure long URLs have line breaks
+\PassOptionsToPackage{capitalize,nameinlink}{cleveref}
 \AfterPackage{cleveref}{%
     \crefname{section}{Sec.}{Secs.}
     \Crefname{section}{Section}{Sections}
