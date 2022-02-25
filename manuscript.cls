@@ -19,14 +19,15 @@
 \RequirePackage{etoolbox}
 \newtoggle{proposal}
 \newtoggle{review}
+\newtoggle{amsthm}
 % Proposal version
 \DeclareOption{proposal}{\toggletrue{proposal}}
 % Review version. Show line numbers and timestamp title page.
 \DeclareOption{review}{\toggletrue{review}}
 % Use 1.5 line spacing instead of double
-\DeclareOption{onehalfspacing}{\AtEndOfPackage{\onehalfspacing}}
+\DeclareOption{onehalfspacing}{\AtEndOfClass{\onehalfspacing}}
 % Place page numbers in the header instead of the footer
-\DeclareOption{pagenumhead}{\AtEndOfPackage{%
+\DeclareOption{pagenumhead}{\AtEndOfClass{%
     \RequirePackage[singlespacing=true]{scrlayer-scrpage}
     \clearpairofpagestyles  % Remove page numbers from the footer
     \ohead[\pagemark]{\pagemark}  % Place page numbers in the "outer" part of header (top-right for one-side)
@@ -38,7 +39,7 @@
     \AfterPackage{biblatex}{\setlength\bibitemsep{0.2\baselineskip}}  % add a bit of separation between bib items
 }
 % Use the `amsthm` package. Added as an option to ensure correct loading order w.r.t. newtx.
-\DeclareOption{amsthm}{\RequirePackage{amsmath,amsthm}}
+\DeclareOption{amsthm}{\toggletrue{amsthm}}
 % Pass unknown options to the scrbook class
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \ProcessOptions\relax
@@ -110,11 +111,14 @@
 % --- Hyphenation and typesetting ---
 \RequirePackage[english]{babel}
 \RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100]{microtype}
+\microtypecontext{spacing=nonfrench}
 \UseMicrotypeSet[protrusion]{basicmath}  % disable protrusion for tt fonts
 
 % --- Fonts (load after babel) ---
-\RequirePackage{newtxtext,newtxmath}  % Use Times Roman fonts
+\RequirePackage{newtxtext}  % Use Times Roman fonts
 \RequirePackage[zerostyle=d,straightquotes]{newtxtt}  % Enhancement of typewriter fonts
+\iftoggle{amsthm}{\RequirePackage{amsmath,amsthm}}{}
+\RequirePackage{newtxmath}  % Use Times Roman-compatible math fonts
 \RequirePackage[T1]{fontenc}
 
 % --- General style tweaks ---
@@ -175,6 +179,6 @@
 }{}
 
 % FIXME: biblatex is using the obsolete command \tt for some reason.
-\let\tt\texttt
+\def\tt{\normalfont\ttfamily}
 
 \endinput

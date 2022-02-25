@@ -53,38 +53,38 @@ Use Times 10-point type, single-spaced.
 
 For the benefit of author(s) and readers, please use the
 {\small\begin{verbatim}
-  \cref{...}
+  \Cref{...}
 \end{verbatim}}  command for cross-referencing to figures, tables, equations, or sections.
 This will automatically insert the appropriate label alongside the cross-reference as in this example:
 \begin{quotation}
-  To see how our method outperforms previous work, please see \cref{fig:onecol} and \cref{tab:example}.
-  It is also possible to refer to multiple targets as once, \eg~to \cref{fig:onecol,fig:short-a}.
-  You may also return to \cref{sec:style-formatting} or look at \cref{eq:also-important}.
+  To see how our method outperforms previous work, please see \Cref{fig:onecol} and \Cref{tab:example}.
+  It is also possible to refer to multiple targets as once, \eg~to \Cref{fig:onecol,fig:short-a}.
+  You may also return to \Cref{sec:style-formatting} or look at \Cref{eq:also-important}.
 \end{quotation}
-If you do not wish to abbreviate the label, for example at the beginning of the sentence, you can use the
+If you wish to abbreviate the label, you can use the
 {\small\begin{verbatim}
-  \Cref{...}
+  \cref{...}
 \end{verbatim}}
 command. Here is an example:
 \begin{quotation}
-  \Cref{fig:onecol} is also quite important.
+  \cref{fig:onecol} is also quite important.
 \end{quotation}
 
 %-------------------------------------------------------------------------
 \subsection{References}
 
-List and number all bibliographical references in 12-point Times, single-spaced, at the end of your thesis.
+List and number all bibliographical references in 12-point Times, single-spaced, at the end of your manuscript.
 To make a reference in the text, use the
 {\small\begin{verbatim}
   \autocite{...}
-\end{verbatim}} command instead of plain \verb|\cite{}|, for example~\autocite{Authors14}.
+\end{verbatim}} command instead of plain \verb`\cite{}`, for example~\autocite{Authors14}.
 Where appropriate, include page numbers and the name(s) of editors of referenced books.
 When you cite multiple papers at once, please make sure that you cite them in numerical order like this \autocite{Alpher02,Alpher03,Alpher05,Authors14b,Authors14}.
 If you use the template as advised, this will be taken care of automatically.
 
 \begin{table}
   \centering
-  \caption{Results. Ours is better.}
+  \caption[Results]{Results. Ours is better. Note that table captions should be placed above, in contrast to figure captions which are positioned below.}
   \begin{tabular}{@{}lc@{}}
     \toprule
     Method & Frobnability \\

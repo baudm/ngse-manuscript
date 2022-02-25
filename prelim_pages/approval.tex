@@ -2,8 +2,7 @@
 
 This \MakeLowercase{\Type}, entitled \textbf{\MakeUppercase{\Title}}, prepared and submitted by \textbf{\MakeUppercase{\Student}}, in partial fulfillment of the requirements for the degree of \textbf{\MakeUppercase{\Degree}} is hereby accepted.\\[1.5cm]
 
-% For PhD students, all panel members are included.
-\IfBeginWith{\Degree}{Master}{%
+\IfStrEq{\Type}{Thesis}{%
     \begin{flushright}
     \begin{tabular}{c}
     \textbf{\MakeUppercase{\Adviser}}\\
@@ -12,7 +11,7 @@ This \MakeLowercase{\Type}, entitled \textbf{\MakeUppercase{\Title}}, prepared a
     \end{flushright}
     \vspace{5cm}
     \def\sigsep{2.5cm}
-}{%
+}{% For PhD students, all panel members are included.
     \begin{center}
     \begin{tabular*}{\textwidth}{@{}c@{\extracolsep{\fill}}c@{}}
      & \textbf{\MakeUppercase{\Adviser}}\\
@@ -23,7 +22,7 @@ This \MakeLowercase{\Type}, entitled \textbf{\MakeUppercase{\Title}}, prepared a
     Panel Member & Panel Member
     \end{tabular*}
     \end{center}
-    \vspace{2.5cm}
+    \vspace{2cm}
     \def\sigsep{2cm}
 }
 
