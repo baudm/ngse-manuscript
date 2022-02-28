@@ -60,6 +60,13 @@ Yes. In `main.tex`, remove the `apa` or `ieee` option from the `manuscript` docu
 ### Why are links in the document enclosed in boxes?
 This is the default behavior of `hyperref`. The boxes are visible only on-screen; they do not appear in print. You may specify `colorlinks` to color the link text instead of showing boxes, or `hidelinks` to fully disable any visual link styling.
 
+### Why does the line spacing vary?
+Double- or 1.5-spacing applies only to the text body. The following are always typeset in single space:
+* Preliminary pages (excluding _Abstract_ and _Acknowledgments_)
+* Footnotes and floats (tables and figures)
+* Bibliography
+* Chapter headings (for consistent top margins across all pages)
+
 ### Can I use package *X* instead of `biblatex`, `cleveref`, etc.?
 The packages *required* in the `manuscript` class are required. These are generally the *go-to* packages used by most documents. The packages in `main.tex` are recommended but not required and can be replaced. However, some of these packages are preconfigured by the `manuscript` class for your convenience.
 
